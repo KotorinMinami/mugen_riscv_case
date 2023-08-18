@@ -1,0 +1,11 @@
+--- /home/minami/vscode/gitee/mugen/testcases/cli-test/lvm2/oe_test_lvm2_pvresize_001.sh	2023-04-12 14:35:23.865506878 +0800
++++ /home/minami/vscode/github/mugen-riscv/mugen-riscv/testcases/cli-test/lvm2/oe_test_lvm2_pvresize_001.sh	2023-03-24 19:56:02.800433474 +0800
+@@ -31,7 +31,7 @@ function run_test() {
+     CHECK_RESULT $?
+     pvresize -y /dev/${local_disk} --setphysicalvolumesize 50MB 2>&1 | grep "Physical volume \"/dev/${local_disk}\" changed"
+     CHECK_RESULT $?
+-    pvs | sed -n 3p | awk {'print$5'} | grep "50.00m"
++    pvs | awk {'print$5'} | grep "50.00m"
+     CHECK_RESULT $?
+     pvresize -y /dev/${local_disk} --reportformat basic | grep "Physical volume \"/dev/${local_disk}\" changed"
+     CHECK_RESULT $?

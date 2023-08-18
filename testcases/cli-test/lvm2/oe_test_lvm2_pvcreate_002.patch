@@ -1,0 +1,11 @@
+--- /home/minami/vscode/gitee/mugen/testcases/cli-test/lvm2/oe_test_lvm2_pvcreate_002.sh	2023-04-12 14:35:23.865506878 +0800
++++ /home/minami/vscode/github/mugen-riscv/mugen-riscv/testcases/cli-test/lvm2/oe_test_lvm2_pvcreate_002.sh	2023-03-24 19:51:35.984430746 +0800
+@@ -31,7 +31,7 @@ function run_test() {
+     CHECK_RESULT $?
+     pvcreate /dev/${local_disk} -y --setphysicalvolumesize 50MB | grep "successfully created"
+     CHECK_RESULT $?
+-    pvs | sed -n 3p | awk {'print$4'} | grep "50.00m"
++    pvs | awk {'print$4'} | grep "50.00m"
+     CHECK_RESULT $?
+     pvcreate /dev/${local_disk} -y --setphysicalvolumesize 50MB --reportformat basic | grep "successfully created"
+     CHECK_RESULT $?

@@ -1,0 +1,28 @@
+--- /home/minami/vscode/gitee/mugen/testcases/doc-test/admin_guide/oe_test_mariadb_modify_delete_user/oe_test_mariadb_modify_delete_user.sh	2023-04-12 14:35:25.161506839 +0800
++++ /home/minami/vscode/github/mugen-riscv/mugen-riscv/testcases/doc-test/admin_guide/oe_test_mariadb_modify_delete_user/oe_test_mariadb_modify_delete_user.sh	2023-03-30 20:15:23.490877343 +0800
+@@ -21,7 +21,10 @@ function pre_test() {
+     LOG_INFO "Start environment preparation."
+     systemctl stop firewalld
+     systemctl disable firewalld
+-
++    rmpck=$(yum list --installed | grep -E "mysql|mariadb" | grep server | awk -F ' ' '{print $1}')
++    if [ "${rmpck}x" != "x" ] ; then
++        DNF_REMOVE 1 "${rmpck}"
++    fi
+     setenforce 0
+     groupadd mysql
+     useradd -g mysql mysql
+@@ -102,6 +105,13 @@ expect eof
+     userdel -r mysql
+     groupdel mysql
+     rm -rf testlog /data/mariadb
++    if [ "${rmpck}x" != "x" ] ; then
++        installedpck=$(yum list --installed | grep -E "mysql|mariadb" | grep server | awk -F ' ' '{print $1}')
++        if [ "${installedpck}x" != "x" ]; then
++            yum remove -y ${installedpck}
++        fi
++        yum install -y ${rmpck}
++    fi
+     LOG_INFO "Finish environment cleanup."
+ }
+ 

@@ -1,0 +1,20 @@
+--- /home/minami/vscode/gitee/mugen/testcases/smoke-test/smoke-basic-os/oe_test_aide_update_database/oe_test_aide_update_database.sh	2023-08-07 17:47:52.379211466 +0800
++++ /home/minami/vscode/github/mugen-riscv/mugen-riscv/testcases/smoke-test/smoke-basic-os/oe_test_aide_update_database/oe_test_aide_update_database.sh	2023-08-18 17:43:58.774267485 +0800
+@@ -17,7 +17,7 @@
+ # @Desc      :   Test aide update database
+ # ############################################
+ 
+-source "${OET_PATH}"/libs/locallibs/common_lib.sh
++source ${OET_PATH}/libs/locallibs/common_lib.sh
+ 
+ function pre_test() {
+     LOG_INFO "Start to prepare the test environment."
+@@ -37,7 +37,7 @@ function run_test() {
+     test -f /var/lib/aide/aide.db.new.gz
+     CHECK_RESULT $? 0 0 "Update execution failed"
+     mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+-    aide --check | grep Changed entries:
++    aide --check | grep "Changed entries:"
+     CHECK_RESULT $? 0 1 "Check execution failed"
+     LOG_INFO "End to run test."
+ }
